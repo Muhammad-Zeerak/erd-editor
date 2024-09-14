@@ -79,6 +79,7 @@ export const Language = {
   TypeScript: 'TypeScript',
   JPA: 'JPA',
   Scala: 'Scala',
+  Json: 'Json',
 } as const;
 export type Language = ValuesType<typeof Language>;
 export const LanguageList: ReadonlyArray<string> = Object.values(Language);

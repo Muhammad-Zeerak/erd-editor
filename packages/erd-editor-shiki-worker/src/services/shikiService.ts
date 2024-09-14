@@ -6,6 +6,7 @@ import graphql from 'shiki/languages/graphql.tmLanguage.json';
 import java from 'shiki/languages/java.tmLanguage.json';
 import kotlin from 'shiki/languages/kotlin.tmLanguage.json';
 import scala from 'shiki/languages/scala.tmLanguage.json';
+import json from 'shiki/languages/json.tmLanguage.json';
 import sql from 'shiki/languages/sql.tmLanguage.json';
 import typescript from 'shiki/languages/typescript.tmLanguage.json';
 import githubDark from 'shiki/themes/github-dark.json';
@@ -63,6 +64,12 @@ const languages: Array<any> = [
     displayName: 'Scala',
     grammar: scala,
   },
+  {
+    id: 'json',
+    scopeName: 'source.json',
+    displayName: 'Json',
+    grammar: json,
+  },
 ];
 
 function getThemeKey(theme?: string): 'dark' | 'light' {
@@ -97,7 +104,8 @@ export class ShikiService {
         | 'csharp'
         | 'java'
         | 'kotlin'
-        | 'scala';
+        | 'scala'
+        | 'json';
       theme?: 'dark' | 'light';
     }
   ): Promise<string> {

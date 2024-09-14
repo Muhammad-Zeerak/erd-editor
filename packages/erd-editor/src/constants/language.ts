@@ -8,4 +8,5 @@ export const LanguageToLangMap: Record<number, string> = {
   [Language.Kotlin]: 'kotlin',
   [Language.Scala]: 'scala',
   [Language.JPA]: 'java',
+  [Language.Json]: 'json',
 };

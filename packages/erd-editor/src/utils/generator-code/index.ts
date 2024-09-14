@@ -30,6 +30,10 @@ import {
   createCode as createCodeTypescript,
   formatTable as formatTableTypescript,
 } from './typescript';
+import {
+  createCode as createCodeJson,
+  formatTable as formatTableJson,
+} from './json';
 
 export function createGeneratorCode(state: RootState): string {
   const {
@@ -51,6 +55,8 @@ export function createGeneratorCode(state: RootState): string {
       return createCodeKotlin(state);
     case Language.Scala:
       return createCodeScala(state);
+    case Language.Json:
+      return createCodeJson(state);
   }
 
   return '';
@@ -94,6 +100,10 @@ export function createGeneratorCodeTable(
       formatTableScala(state, { buffer, table });
       buffer.push('');
       break;
+      case Language.Json:
+        formatTableJson(state, { buffer, table });
+        buffer.push('');
+        break;
   }
 
   return buffer.join('\n');
