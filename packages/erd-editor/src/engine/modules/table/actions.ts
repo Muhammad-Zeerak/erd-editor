@@ -14,6 +14,8 @@ export const ActionType = {
   changeTableColor: 'table.changeColor',
   changeZIndex: 'table.changeZIndex',
   sortTable: 'table.sort',
+  changeTableAuditable: 'table.changeAuditable',
+  changeTableRevisionEnabled: 'table.changeRevisionEnabled',
 } as const;
 export type ActionType = ValuesType<typeof ActionType>;
 
@@ -51,6 +53,8 @@ export type ActionMap = {
     zIndex: number;
   };
   [ActionType.sortTable]: void;
+  [ActionType.changeTableAuditable]: ChangeTableBooleanPayload;
+  [ActionType.changeTableRevisionEnabled]: ChangeTableBooleanPayload;
 };
 
 export type ReducerType<T extends keyof ActionMap> = Reducer<
@@ -63,4 +67,9 @@ export type ReducerType<T extends keyof ActionMap> = Reducer<
 type ChangeTableValuePayload = {
   id: string;
   value: string;
+};
+
+type ChangeTableBooleanPayload = {
+  id: string;
+  value: boolean;
 };

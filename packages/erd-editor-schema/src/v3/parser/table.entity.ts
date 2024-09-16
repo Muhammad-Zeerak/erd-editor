@@ -8,6 +8,8 @@ export const createTable = (): Table => ({
   id: '',
   name: '',
   comment: '',
+  auditable: false,
+  revisionEnabled: false,
   columnIds: [],
   seqColumnIds: [],
   ui: {

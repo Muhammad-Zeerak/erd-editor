@@ -4,6 +4,8 @@ export type Table = EntityType<{
   id: string;
   name: string;
   comment: string;
+  auditable: boolean;
+  revisionEnabled: boolean;
   columnIds: string[];
   seqColumnIds: string[];
   ui: TableUI;

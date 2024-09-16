@@ -78,8 +78,8 @@ export function formatTable(
   const formatTableEntity = {
     tableName: tableName,
     name: table.name,
-    auditable: false,
-    revisionEnabled: false,
+    auditable: table.auditable,
+    revisionEnabled: table.revisionEnabled,
     entityDefinition: {
       columns: validColumns,
     },

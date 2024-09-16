@@ -11,6 +11,8 @@ export const createTable = (value?: DeepPartial<Table>): Table =>
       id: nanoid(),
       name: '',
       comment: '',
+      auditable: false,
+      revisionEnabled: false,
       columnIds: [],
       seqColumnIds: [],
       ui: {

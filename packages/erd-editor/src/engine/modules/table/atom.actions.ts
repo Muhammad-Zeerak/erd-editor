@@ -193,6 +193,40 @@ const sortTable: ReducerType<typeof ActionType.sortTable> = state => {
   });
 };
 
+export const changeTableAuditableAction = createAction<
+  ActionMap[typeof ActionType.changeTableAuditable]
+>(ActionType.changeTableAuditable);
+
+export const changeTableAuditable: ReducerType<
+  typeof ActionType.changeTableAuditable
+> = ({ collections, lww }, { payload: { id, value }, timestamp }) => {
+  const collection = query(collections).collection('tableEntities');
+  collection.getOrCreate(id, id => createTable({ id }));
+
+  collection.replaceOperator(lww, timestamp, id, 'auditable', () => {
+    collection.updateOne(id, table => {
+      table.auditable = value;
+    });
+  });
+};
+
+export const changeTableRevisionEnabledAction = createAction<
+  ActionMap[typeof ActionType.changeTableRevisionEnabled]
+>(ActionType.changeTableRevisionEnabled);
+
+export const changeTableRevisionEnabled: ReducerType<
+  typeof ActionType.changeTableRevisionEnabled
+> = ({ collections, lww }, { payload: { id, value }, timestamp }) => {
+  const collection = query(collections).collection('tableEntities');
+  collection.getOrCreate(id, id => createTable({ id }));
+
+  collection.replaceOperator(lww, timestamp, id, 'revisionEnabled', () => {
+    collection.updateOne(id, table => {
+      table.revisionEnabled = value;
+    });
+  });
+};
+
 export const tableReducers = {
   [ActionType.addTable]: addTable,
   [ActionType.moveTable]: moveTable,
@@ -203,6 +237,8 @@ export const tableReducers = {
   [ActionType.changeTableColor]: changeTableColor,
   [ActionType.changeZIndex]: changeZIndex,
   [ActionType.sortTable]: sortTable,
+  [ActionType.changeTableAuditable]: changeTableAuditable,
+  [ActionType.changeTableRevisionEnabled]: changeTableRevisionEnabled,
 };
 
 export const actions = {
@@ -215,4 +251,6 @@ export const actions = {
   changeTableColorAction,
   changeZIndexAction,
   sortTableAction,
+  changeTableAuditableAction,
+  changeTableRevisionEnabledAction
 };

@@ -28,8 +28,10 @@ import {
 } from '@/engine/modules/editor/generator.actions';
 import { FocusType } from '@/engine/modules/editor/state';
 import {
+  changeTableAuditableAction,
   changeTableCommentAction,
   changeTableNameAction,
+  changeTableRevisionEnabledAction,
 } from '@/engine/modules/table/atom.actions';
 import { removeTableAction$ } from '@/engine/modules/table/generator.actions';
 import { addColumnAction$ } from '@/engine/modules/table-column/generator.actions';
@@ -219,6 +221,17 @@ const Table: FC<TableProps> = (props, ctx) => {
     );
   });
 
+  const handleCheckboxChange = (event: Event, type: 'auditable' | 'revisionEnabled') => {
+    const input = event.target as HTMLInputElement;
+    const { store } = app.value;
+    
+    if (type === 'auditable') {
+      store.dispatch(changeTableAuditableAction({ id: props.table.id, value: input.checked }));
+    } else if (type === 'revisionEnabled') {
+      store.dispatch(changeTableRevisionEnabledAction({ id: props.table.id, value: input.checked }));
+    }
+  };
+
   return () => {
     const { store, keyBindingMap } = app.value;
     const { editor, settings, collections } = store.state;
@@ -335,6 +348,23 @@ const Table: FC<TableProps> = (props, ctx) => {
                   </div>
                 `
               : null}
+
+              <label> 
+              Auditable
+                <input type="checkbox"
+                  .checked=${table.auditable}
+                  @change=${(event: Event) => handleCheckboxChange(event, 'auditable')}
+                />
+              </label>
+
+              <label>
+              Revision Enabled
+                <input type="checkbox"
+                  .checked=${table.revisionEnabled}
+                  @change=${(event: Event) => handleCheckboxChange(event, 'revisionEnabled')}
+                />
+              </label>
+
           </div>
         </div>
         <div
